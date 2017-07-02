@@ -182,7 +182,6 @@ payment.addEventListener('change', (e) => {
 // Add event listener to credit card number input.
     // Give real-time feedback based on current state of input.
 ccNumber.addEventListener('keyup', () => {
-  console.log('pressed');
   value = ccNumber.value;
   ccMessage.textContent = '';
   if (isEmpty(value)){
@@ -207,7 +206,6 @@ ccNumber.addEventListener('keyup', () => {
 // Add event listener to zip code input for credit card.
     // Give real-time feedback based on current state of input.
 zipNumber.addEventListener('keyup', () => {
-  console.log('pressed');
   value = zip.value;
   zipMessage.textContent = '';
   if (isEmpty(value)){
@@ -232,7 +230,6 @@ zipNumber.addEventListener('keyup', () => {
 // Add event listener to cvv input for credit card.
     // Give real-time feedback based on current state of input.
 cvvNumber.addEventListener('keyup', () => {
-  console.log('pressed');
   value = cvv.value;
   cvvMessage.textContent = '';
   if (isEmpty(value)){
