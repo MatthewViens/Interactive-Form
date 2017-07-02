@@ -257,6 +257,7 @@ cvvNumber.addEventListener('keyup', () => {
 // Add event listener to form submit.
   // Prevent default behavior.
   // Store true or false in array for each input validation.
+  // If payment is credit card, add feedback if no data entered.
   // If array contains no false values, submit form.
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -267,6 +268,15 @@ form.addEventListener('submit', (e) => {
   formValidity.push(validateShirt());
   formValidity.push(validateActivities());
   if(payment.value === 'credit-card'){
+    if(!(ccNumberValidity)){
+      ccNumber.classList.add('invalid');
+    }
+    if(!(zipNumberValidity)){
+      zipNumber.classList.add('invalid');
+    }
+    if(!(cvvNumberValidity)){
+      cvvNumber.classList.add('invalid');
+    }
     formValidity.push(ccNumberValidity);
     formValidity.push(zipNumberValidity);
     formValidity.push(cvvNumberValidity);
@@ -307,7 +317,7 @@ function validateEmail() {
     mail.setAttribute('placeholder', 'Email address must be valid');
     return false;
   } else {
-    mail.style.border = '';
+    mail.classList.remove('invalid');
     return true;
   }
 }
@@ -323,7 +333,7 @@ function validateJobRole(){
       otherTitle.setAttribute('placeholder', 'Please enter your job role');
       return false;
     } else {
-      otherTitle.style.border = '';
+      otherTitle.classList.remove('invalid');
       return true;
     }
   }
