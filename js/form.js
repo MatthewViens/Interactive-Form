@@ -1,17 +1,17 @@
 // Select elements for later manipulation
 const form = document.querySelector('form'),
-      title = document.getElementById('title'),
+      titleField = document.getElementById('title'),
       otherTitle = document.getElementById('other-title'),
       activities = document.querySelector('.activities'),
       total = document.createElement('h3'),
       colorDiv = document.getElementById('colors-js-puns'),
-      color = document.getElementById('color'),
-      payment = document.getElementById('payment'),
+      colorField = document.getElementById('color'),
+      paymentField = document.getElementById('payment'),
       creditCard = document.getElementById('credit-card'),
       paypal = document.querySelector('.paypal'),
       bitcoin = document.querySelector('.bitcoin'),
       name = document.getElementById('name'),
-      mail = document.getElementById('mail'),
+      mailField = document.getElementById('mail'),
       submit = document.querySelector('button'),
       ccNumber = document.getElementById('cc-num'),
       zipNumber = document.getElementById('zip'),
@@ -35,7 +35,7 @@ messageDiv.appendChild(cvvMessage);
 creditCard.appendChild(messageDiv);
 
 // Create arrays for color options from HTML.
-const colorOptions = Array.from(color.children);
+const colorOptions = Array.from(colorField.children);
       JSPuns = [];
       heartJS = [];
 // Sort HTML shirt option elements depending on text content.
@@ -106,7 +106,7 @@ function isEmpty(value){
 
 // Add event listener so that when title select changes to 'other', a text
 // input appears.
-title.addEventListener('change', (e) => {
+titleField.addEventListener('change', (e) => {
   if (e.target.value === 'other'){
     otherTitle.style.display = '';
   } else {
@@ -118,14 +118,14 @@ title.addEventListener('change', (e) => {
 // accordingly.
 document.getElementById('design').addEventListener('change', (e) => {
   let selection = e.target.value;
-  color.innerHTML = '';
+  colorField.innerHTML = '';
   if(selection === 'js puns'){
     for(let i = 0; i < JSPuns.length; i++){
-      color.appendChild(JSPuns[i]);
+      colorField.appendChild(JSPuns[i]);
     }
   } else if(selection === 'heart js'){
     for(let i = 0; i < heartJS.length; i++){
-      color.appendChild(heartJS[i]);
+      colorField.appendChild(heartJS[i]);
     }
   }
   colorDiv.style.display = '';
@@ -155,7 +155,7 @@ activities.addEventListener('change', (e) => {
       }
     }
   }
-  total.textContent = `Total: ${amountDue}`;
+  total.textContent = `Total: $${amountDue}`;
   if (amountDue > 0){
     total.style.display = 'block';
   } else {
@@ -172,8 +172,8 @@ payment.addEventListener('change', (e) => {
   paypal.style.display = 'none';
   bitcoin.style.display = 'none';
   let selected = e.target.value;
-  for(let i = 0; i < payment.children.length; i++){
-    if(payment.children[i].value === selected){
+  for(let i = 0; i < paymentField.children.length; i++){
+    if(paymentField.children[i].value === selected){
       document.querySelector(`.${selected}`).style.display = '';
     }
   }
@@ -264,7 +264,7 @@ form.addEventListener('submit', (e) => {
   formValidity.push(validateJobRole());
   formValidity.push(validateShirt());
   formValidity.push(validateActivities());
-  if(payment.value === 'credit-card'){
+  if(paymentField.value === 'credit-card'){
     if(!(ccNumberValidity)){
       ccNumber.classList.add('invalid');
     }
@@ -303,18 +303,18 @@ function validateName() {
     // Returns true or false depending on weather input is valid or not.
 function validateEmail() {
   let mailre = /\S+@\S+\.\S+/;
-  if(isEmpty(mail.value)){
-    mail.classList.add('invalid');
-    mail.value = '';
-    mail.setAttribute('placeholder', "Please enter your email address");
+  if(isEmpty(mailField.value)){
+    mailField.classList.add('invalid');
+    mailField.value = '';
+    mailField.setAttribute('placeholder', "Please enter your email address");
     return false;
-  } else if(!mailre.test(mail.value)){
-    mail.classList.add('invalid');
-    mail.value = '';
-    mail.setAttribute('placeholder', 'Email address must be valid');
+  } else if(!mailre.test(mailField.value)){
+    mailField.classList.add('invalid');
+    mailField.value = '';
+    mailField.setAttribute('placeholder', 'Email address must be valid');
     return false;
   } else {
-    mail.classList.remove('invalid');
+    mailField.classList.remove('invalid');
     return true;
   }
 }
@@ -323,7 +323,7 @@ function validateEmail() {
     // Checks in input is empty.
     // Returns true or false depending on weather input is valid or not.
 function validateJobRole(){
-  if(title.value === 'Other'){
+  if(titleField.value === 'Other'){
     if(otherTitle.value.trim() === ''){
       otherTitle.classList.add('invalid');
       otherTitle.value = '';
